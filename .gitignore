@@ -30,14 +30,78 @@ MANIFEST
 .venv
 env/
 venv/
+ENV/
+env.bak/
+venv.bak/
 
-# IDE
+# IDE / Editor settings
 .vscode/
 .idea/
-
-# OS
+*.swp
+*.swo
+*~
 .DS_Store
+.project
+.pydevproject
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+config/secrets.py
+secrets.json
+credentials.json
+api_keys.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+.directory
+._.DS_Store
 
 # Temporary files
 tempCodeRunnerFile.py
+*.tmp
+*.bak
+*.log
+*.pid
+
+# Cache files
 .ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Game-specific
+saves/
+*.save
+user_data/
+highscores.json
+player_progress.json
+
+# Test reports
+test_results/
+coverage_report/
+
+# Compiled Python files
+*.pyc
+*.pyo
+
+# IDEs
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+.idea/*
+*.iml
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows
+$RECYCLE.BIN/
+ehthumbs.db
