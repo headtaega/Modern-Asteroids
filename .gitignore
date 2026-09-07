@@ -105,3 +105,4 @@ coverage_report/
 # Windows
 $RECYCLE.BIN/
 ehthumbs.db
+game_state.jsonl
