@@ -1,7 +1,7 @@
 import pygame
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS
 from logger import log_state
-from player import Player
+from player_class import Player
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -26,6 +26,7 @@ def main():
         dt = clock.tick(60) / 1000
 
         screen.fill("black")
+        player_object.update(dt)
         player_object.draw(screen)
         pygame.display.flip()
 
@@ -33,3 +34,4 @@ if __name__ == "__main__":
     main()
 
 # to run the game: uv run main.py
+# start virtual machine: source .venv/bin/activate
