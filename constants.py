@@ -5,3 +5,6 @@ SCREEN_HEIGHT = 720
 # player
 PLAYER_RADIUS = 20
 LINE_WIDTH = 2
+
+# moving and turning
+PLAYER_TRUN_SPEED = 300
