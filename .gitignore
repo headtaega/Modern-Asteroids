@@ -82,6 +82,8 @@ saves/
 user_data/
 highscores.json
 player_progress.json
+game_state.jsonl
+game_events.jsonl
 
 # Test reports
 test_results/
@@ -105,4 +107,3 @@ coverage_report/
 # Windows
 $RECYCLE.BIN/
 ehthumbs.db
-game_state.jsonl
