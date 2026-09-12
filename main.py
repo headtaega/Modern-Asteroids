@@ -4,6 +4,9 @@ from logger import log_state
 from player_class import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from logger import log_event
+import sys
+from shot import Shot
 
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
@@ -22,10 +25,12 @@ def main():
     updatable_group = pygame.sprite.Group()
     drawable_group = pygame.sprite.Group()
     asteroids_group = pygame.sprite.Group()
+    shots_group = pygame.sprite.Group()
 
     Player.containers = (updatable_group, drawable_group)
     Asteroid.containers = (asteroids_group, updatable_group, drawable_group)
     AsteroidField.containers = (updatable_group)
+    Shot.containers = (shots_group, drawable_group, updatable_group)
 
     # connects the asteroid field to the game loop
     asteroidfield_object = AsteroidField()
@@ -48,6 +53,14 @@ def main():
         # updates everything updatable inside the Player class
         updatable_group.update(dt)
 
+        # checks if player has collided with an asteroid
+        for asteroid in asteroids_group:
+            if asteroid.collides_with(player_object):
+                log_event("player_hit")
+                print("Game over")
+                sys.exit()
+            else:
+                continue
         # makes the screen black after the last frame 
         # to put the new frame on the screen
         screen.fill("black")
