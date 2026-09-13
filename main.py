@@ -35,7 +35,7 @@ def main():
     # connects the asteroid field to the game loop
     asteroidfield_object = AsteroidField()
 
-    # dont worry about this
+    # creates the player 
     player_object = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # game loop
@@ -61,6 +61,18 @@ def main():
                 sys.exit()
             else:
                 continue
+
+        # cheks if an bullet has hit an asteroid and 
+        # in that case removes both of them   
+        for current_asteroid in asteroids_group:
+            for shot in shots_group:
+                if shot.collides_with(current_asteroid):
+                    log_event("asteroid_shot")
+                    shot.kill()
+                    current_asteroid.split(Asteroid)
+                else:
+                    continue
+        
         # makes the screen black after the last frame 
         # to put the new frame on the screen
         screen.fill("black")
