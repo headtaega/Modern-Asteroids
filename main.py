@@ -16,6 +16,10 @@ def main():
     #creates the screen
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Modern-Asteroid")
+
+    # background
+    background = pygame.image.load("background.png_original")
 
     # makes the game run on x FPS
     clock = pygame.time.Clock()
@@ -73,9 +77,9 @@ def main():
                 else:
                     continue
         
-        # makes the screen black after the last frame 
+        # puts the backround after the last frame 
         # to put the new frame on the screen
-        screen.fill("black")
+        screen.blit(background, (0, 0))
 
         # draws every object one at a time onto the screen 
         # from the Player class
