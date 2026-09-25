@@ -7,7 +7,10 @@ from asteroidfield import AsteroidField
 from logger import log_event
 import sys
 from shot import Shot
+from powerups_class import Powerups
+from powerup_manager import Powerup_manager
 
+# EVERYTHING
 def main():
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -21,6 +24,8 @@ def main():
     # background
     background = pygame.image.load("background.png_original")
 
+    powerup_manager = Powerup_manager()
+
     # makes the game run on x FPS
     clock = pygame.time.Clock()
     dt = 0.0
@@ -30,11 +35,13 @@ def main():
     drawable_group = pygame.sprite.Group()
     asteroids_group = pygame.sprite.Group()
     shots_group = pygame.sprite.Group()
+    powerups_group = pygame.sprite.Group()
 
     Player.containers = (updatable_group, drawable_group)
     Asteroid.containers = (asteroids_group, updatable_group, drawable_group)
     AsteroidField.containers = (updatable_group)
     Shot.containers = (shots_group, drawable_group, updatable_group)
+    Powerups.containers = (powerups_group, drawable_group, updatable_group)
 
     # connects the asteroid field to the game loop
     asteroidfield_object = AsteroidField()
@@ -57,6 +64,9 @@ def main():
         # updates everything updatable inside the Player class
         updatable_group.update(dt)
 
+        #
+        powerup_manager.update(dt)
+
         # checks if player has collided with an asteroid
         for asteroid in asteroids_group:
             if asteroid.collides_with(player_object):
@@ -66,7 +76,7 @@ def main():
             else:
                 continue
 
-        # cheks if an bullet has hit an asteroid and 
+        # checks if an bullet has hit an asteroid and 
         # in that case removes both of them   
         for current_asteroid in asteroids_group:
             for shot in shots_group:
@@ -76,7 +86,16 @@ def main():
                     current_asteroid.split(Asteroid)
                 else:
                     continue
-        
+
+        # checks if player has touched an powerup and
+        # removes the powerup
+        for current_powerup in powerups_group:
+                    if current_powerup.collides_with(player_object):
+                        log_event("picked up powerup")
+                        current_powerup.kill()
+                    else:
+                        continue
+
         # puts the backround after the last frame 
         # to put the new frame on the screen
         screen.blit(background, (0, 0))
