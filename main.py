@@ -67,35 +67,49 @@ def main():
         #
         powerup_manager.update(dt)
 
-        # checks if player has collided with an asteroid
-        for asteroid in asteroids_group:
-            if asteroid.collides_with(player_object):
-                log_event("player_hit")
-                print("Game over")
-                sys.exit()
-            else:
-                continue
+        for current_powerup in powerups_group:
+            # checks if the player is touching the powerup
+            if current_powerup.position.distance_to(player_object.position) < 100:  # Larger collision area
+                        
+            # powerup timers
+                if current_powerup.powerup_kinds == 1:
+                    player_object.shield_active = True
+                    player_object.shield_timer = 10.0
 
-        # checks if an bullet has hit an asteroid and 
-        # in that case removes both of them   
+                elif current_powerup.powerup_kinds == 2:
+                    player_object.rapid_fire_active = True
+                    player_object.rapid_fire_timer = 10.0
+
+                elif current_powerup.powerup_kinds == 3:
+                    player_object.invincible_active = True
+                    player_object.invincible_timer = 10.0
+        
+                log_event("picked up powerup")
+                current_powerup.kill()
+        
+        print(f"Powerup manager spawning, timer: {powerup_manager.spawn_timer}")
+        print(f"Powerups in group: {len(powerups_group)}")
+
+        # check if an asteroid hits the player
+        for current_asteroid in asteroids_group:
+            if current_asteroid.collides_with(player_object):
+                if player_object.shield_active:
+                    log_event("asteroid blocked")
+
+                    current_asteroid.kill()
+                    player_object.shield_active = False
+                else:
+                    log_event("player_hit")
+                    sys.exit()
+
+        # checks if an bullet has hit an asteroid  
         for current_asteroid in asteroids_group:
             for shot in shots_group:
                 if shot.collides_with(current_asteroid):
                     log_event("asteroid_shot")
                     shot.kill()
                     current_asteroid.split(Asteroid)
-                else:
-                    continue
-
-        # checks if player has touched an powerup and
-        # removes the powerup
-        for current_powerup in powerups_group:
-                    if current_powerup.collides_with(player_object):
-                        log_event("picked up powerup")
-                        current_powerup.kill()
-                    else:
-                        continue
-
+        
         # puts the backround after the last frame 
         # to put the new frame on the screen
         screen.blit(background, (0, 0))

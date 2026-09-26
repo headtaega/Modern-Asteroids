@@ -9,12 +9,13 @@ class Powerups(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.position: pygame.Vector2 = pygame.Vector2(x, y)
         self.powerup_kinds = powerup_kinds
+        
 
     def draw(self, screen):
         if self.powerup_kinds == 1:
             pygame.draw.rect(screen, "blue", (self.position.x, self.position.y, 20, 20), POWERUP_LINE_WIDTH)
         elif self.powerup_kinds == 2:
-            pygame.draw.rect(screen, "red", (self.position.x, self.position.y, 21, 21), POWERUP_LINE_WIDTH)
+            pygame.draw.rect(screen, "green", (self.position.x, self.position.y, 21, 21), POWERUP_LINE_WIDTH)
         else:
             pygame.draw.rect(screen, "yellow", (self.position.x, self.position.y, 22, 22), POWERUP_LINE_WIDTH)
 
