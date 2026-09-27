@@ -1,5 +1,5 @@
 import pygame
-from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS
+from constants import SCREEN_WIDTH, SCREEN_HEIGHT, PLAYER_RADIUS, PLAYER_SHOOT_COOLDOWN_SECONDS
 from logger import log_state
 from player_class import Player
 from asteroid import Asteroid
@@ -78,7 +78,7 @@ def main():
 
                 elif current_powerup.powerup_kinds == 2:
                     player_object.rapid_fire_active = True
-                    player_object.rapid_fire_timer = 10.0
+                    player_object.rapid_fire_timer = 2.5
 
                 elif current_powerup.powerup_kinds == 3:
                     player_object.invincible_active = True
