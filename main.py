@@ -82,7 +82,7 @@ def main():
 
                 elif current_powerup.powerup_kinds == 3:
                     player_object.invincible_active = True
-                    player_object.invincible_timer = 10.0
+                    player_object.invincible_timer = 2.5
         
                 log_event("picked up powerup")
                 current_powerup.kill()
@@ -98,8 +98,12 @@ def main():
 
                     current_asteroid.kill()
                     player_object.shield_active = False
+
+                elif player_object.invincible_active:
+                    log_event("passed through asteroid")
+
                 else:
-                    log_event("player_hit")
+                    log_event("player hit")
                     sys.exit()
 
         # checks if an bullet has hit an asteroid  
