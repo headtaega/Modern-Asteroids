@@ -64,6 +64,7 @@ python main.py
 ## Author
 
 [headtaega](https://github.com/headtaega)
+(Based on a Boot.dev guided project. Starter code from Boot.dev.)
 
 ## License
 
